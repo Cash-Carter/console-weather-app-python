@@ -21,5 +21,5 @@ python -m pip install python-dotenv requests
 ```
 - Create a .env file and add your [OpenWeather API key](openweathermap.org/api) to it
 ```
-OWM_API_KEY={your api key}
+OWM_API_KEY={your_api_key}
 ```
