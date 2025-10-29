@@ -20,7 +20,7 @@ WEATHER_API_PARTIAL = partial(
     "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_key}&units={units}".format,
     API_key=OWM_API_KEY)
 
-US_CODES = ["US", "USA"]
+US_CODES = ["US", "USA", "840"]
 VALID_UNITS = ["standard", "metric", "imperial"]
 
 
