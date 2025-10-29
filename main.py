@@ -25,7 +25,7 @@ VALID_UNITS = {"standard", "metric", "imperial"}
 
 
 def main():
-    while (True):
+    while True:
         name, lat, lon = ask_for_location()
         units = ask_for_units()
 
