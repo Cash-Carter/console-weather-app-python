@@ -41,8 +41,8 @@ def main():
             print(f"the temprature is {temprature_format(units, json["main"]["temp"])}, feels like {temprature_format(units, json["main"]["feels_like"])}")
             print(f"the humidity is {json["main"]["humidity"]}%")
             print(f"wind speeds are {speed_format(units, json["wind"]["speed"])} blowing at {json["wind"]["deg"]}°")
-            print(f"sunrise is at {datetime.fromtimestamp(int(json["sys"]["sunrise"])).strftime("%H:%M:%S")}")
-            print(f"sunset is at {datetime.fromtimestamp(int(json["sys"]["sunset"])).strftime("%H:%M:%S")}")
+            print(f"sunrise is at {time_format(json["sys"]["sunrise"])}")
+            print(f"sunset is at {time_format(json["sys"]["sunset"])}")
 
 
 def ask_for_location() -> (str, str, str):
@@ -106,6 +106,10 @@ def speed_format(units, temprature):
             return f"{temprature}m/s"
         case "imperial":
             return f"{temprature}mph"
+
+
+def time_format(timestamp):
+    return datetime.fromtimestamp(int(timestamp)).strftime("%H:%M:%S")
 
 
 if __name__ == "__main__":
