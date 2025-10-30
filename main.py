@@ -73,8 +73,7 @@ def ask_for_location() -> (str, str, str):
         except Exception as e:
             print(e)
         else:
-            json = response.json()
-            if json:
+            if json := response.json():
                 json = json[0]
                 return json["name"], json["lat"], json["lon"]
         print("no location found, try again")
@@ -100,9 +99,7 @@ def temprature_format(units, temprature):
 
 def speed_format(units, temprature):
     match units:
-        case "standard":
-            return f"{temprature}m/s"
-        case "metric":
+        case "standard" | "metric":
             return f"{temprature}m/s"
         case "imperial":
             return f"{temprature}mph"
