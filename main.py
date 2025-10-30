@@ -47,44 +47,44 @@ def main():
 
 def ask_for_location() -> (str, str, str):
     """returns (name, lat, lon)"""
-    while True:
-        country_code = input("input country (EX: US, USA, CA, CAN): ").strip().upper()
-        """follows ISO 3166"""
-        is_country_us = country_code in US_CODES
+    country_code = input("input country (EX: US, USA, CA, CAN): ").strip().upper()
+    """follows ISO 3166"""
+    is_country_us = country_code in US_CODES
 
-        if is_country_us:
-            state_code = input("input state (EX: IL, VA): ").strip().upper()
-        city_name = input("input city (EX: Chicago, Seattle): ").strip()
+    if is_country_us:
+        state_code = input("input state (EX: IL, VA): ").strip().upper()
+    city_name = input("input city (EX: Chicago, Seattle): ").strip()
 
-        if is_country_us:
-            request = GEOCODE_API_US_PARTIAL(
-                city_name=city_name,
-                state_code=state_code,
-                country_code=country_code)
-        else:
-            request = GEOCODE_API_PARTIAL(
-                city_name=city_name,
-                country_code=country_code)
+    if is_country_us:
+        request = GEOCODE_API_US_PARTIAL(
+            city_name=city_name,
+            state_code=state_code,
+            country_code=country_code)
+    else:
+        request = GEOCODE_API_PARTIAL(
+            city_name=city_name,
+            country_code=country_code)
 
-        print("requesting location data...")
-        response = requests.get(request)
-        try:
-            response.raise_for_status()
-        except Exception as e:
-            print(e)
-        else:
-            if json := response.json():
-                json = json[0]
-                return json["name"], json["lat"], json["lon"]
-        print("no location found, try again")
+    print("requesting location data...")
+    response = requests.get(request)
+    try:
+        response.raise_for_status()
+    except Exception as e:
+        print(e)
+    else:
+        if json := response.json():
+            json = json[0]
+            return json["name"], json["lat"], json["lon"]
+    print("no location found, try again")
+    return ask_for_location()
 
 
 def ask_for_units() -> str:
-    while True:
-        units = input("input units (standard, metric, imperial): ").strip().lower()
-        if units in VALID_UNITS:
-            return units
-        print("invalid units, try again")
+    units = input("input units (standard, metric, imperial): ").strip().lower()
+    if units in VALID_UNITS:
+        return units
+    print("invalid units, try again")
+    return ask_for_units()
 
 
 def temprature_format(units, temprature):
